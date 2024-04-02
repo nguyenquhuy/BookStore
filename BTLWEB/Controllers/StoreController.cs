@@ -15,9 +15,16 @@ namespace BTLWEB.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, string minPrice, string maxPrice)
         {
-            return View(await _context.Book.ToListAsync());
+            var books = _context.Book.Select(b => b);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(b => b.Title.Contains(searchString) || b.Author.Contains(searchString));
+            }
+
+            return View(await books.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
