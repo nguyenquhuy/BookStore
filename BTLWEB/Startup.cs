@@ -1,4 +1,6 @@
 ﻿using BTLWEB.Models;
+using BTLWEB.Repository.Implementations;
+using BTLWEB.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +24,8 @@ namespace BTLWEB
         {
             services.AddDbContext<BookContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ICategoryRespository, CategoryRespository>();
 
             services.AddDefaultIdentity<DefaultUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<BookContext>();
 
@@ -62,7 +66,7 @@ namespace BTLWEB
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Store}/{action=Index}/{id?}");
+                    pattern: "{controller=Category}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
