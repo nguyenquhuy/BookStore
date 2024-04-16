@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BTLWEB.Models.Book>
+
+
+<h2 class="my-4">Result for @ViewData["Search"]</h2>
+
+<div class="row">
+    @foreach (var book in Model)
+    {
+        <div class="col-3">
+            <div class="card my-2 store-card">
+                <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@book.Id">
+                    <img src="@book.ImageUrl" class="card-img-top card-img-custom">
+                    <div class="card-body" style="height: 6em;">
+                        <h5 class="mb-3">@book.Title</h5>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-text">@book.Price.ToString("c")</span>
+                        <button class="btn btn-primary float-right store-btn add-to-cart-btn" data-book-id="@book.Id"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+@* Đây là AJAX *@
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function () {
+            $('.add-to-cart-btn').click(function (e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của nút
+
+                var bookId = $(this).data('book-id');
+
+                $.ajax({
+                    url: '@Url.Action("AddToCart", "Cart")',
+                    type: 'POST',
+                    data: { id: bookId },
+                    success: function (result) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thêm giỏ hàng thành công',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi nếu cần
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thêm giỏ hàng thất bại',
+                            text: 'Vui lòng thử lại',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+

@@ -1,16 +1,19 @@
 ﻿using BTLWEB.Models;
 using BTLWEB.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BTLWEB.Controllers
 {
     public class CategoryController : Controller
     {
         private readonly ICategoryRespository _categoryRepo;
+        private readonly BookContext _context;
 
-        public CategoryController(ICategoryRespository categoryRepo)
+        public CategoryController(ICategoryRespository categoryRepo, BookContext context)
         {
             _categoryRepo = categoryRepo;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -18,6 +21,21 @@ namespace BTLWEB.Controllers
             var categories = await _categoryRepo.GetAll();
             return View(categories);
         }
+
+        public async Task<IActionResult> Search(string category)
+        {
+            var booksInCategory = from book in _context.Book
+                                  join bookCategory in _context.BookCategory on book.Id equals bookCategory.BookId
+                                  join cat in _context.Category on bookCategory.CategoryId equals cat.Id
+                                  where cat.Name == category
+                                  select book;
+
+            var books = await booksInCategory.ToListAsync();
+            ViewData["Search"] = category; // Set the category name in ViewData
+
+            return View(books); // Pass the list of books to the view
+        }
+
 
         [HttpGet]
         public IActionResult Create()

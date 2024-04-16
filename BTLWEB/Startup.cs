@@ -66,7 +66,7 @@ namespace BTLWEB
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Category}/{action=Index}/{id?}");
+                    pattern: "{controller=Store}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

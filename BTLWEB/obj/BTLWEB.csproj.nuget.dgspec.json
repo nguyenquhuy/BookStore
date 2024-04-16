@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LTWNC\\BTLWEB\\BTLWEB\\BTLWEB.csproj": {}
+    "C:\\Users\\huyn0_9et30uk\\source\\repos\\New folder\\BTLWEB\\BTLWEB.csproj": {}
   },
   "projects": {
-    "D:\\LTWNC\\BTLWEB\\BTLWEB\\BTLWEB.csproj": {
+    "C:\\Users\\huyn0_9et30uk\\source\\repos\\New folder\\BTLWEB\\BTLWEB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LTWNC\\BTLWEB\\BTLWEB\\BTLWEB.csproj",
+        "projectUniqueName": "C:\\Users\\huyn0_9et30uk\\source\\repos\\New folder\\BTLWEB\\BTLWEB.csproj",
         "projectName": "BTLWEB",
-        "projectPath": "D:\\LTWNC\\BTLWEB\\BTLWEB\\BTLWEB.csproj",
+        "projectPath": "C:\\Users\\huyn0_9et30uk\\source\\repos\\New folder\\BTLWEB\\BTLWEB.csproj",
         "packagesPath": "C:\\Users\\huyn0_9et30uk\\.nuget\\packages\\",
-        "outputPath": "D:\\LTWNC\\BTLWEB\\BTLWEB\\obj\\",
+        "outputPath": "C:\\Users\\huyn0_9et30uk\\source\\repos\\New folder\\BTLWEB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huyn0_9et30uk\\AppData\\Roaming\\NuGet\\NuGet.Config",

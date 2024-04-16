@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BTLWEB.Models
 {
     public class Category
     {
         [Key]
-        public int Id {  get; set; }
-        [Required]
-        [Display(Name ="Thể loại")]
+        public int Id { get; set; }
+
         public string? Name { get; set; }
     }
 }

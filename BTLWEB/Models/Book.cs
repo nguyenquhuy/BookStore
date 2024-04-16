@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BTLWEB.Models
 {
@@ -22,5 +24,17 @@ namespace BTLWEB.Models
         public string? Author { get; set; }
         [Display(Name = "Image URL")]
         public string? ImageUrl { get; set; }
+        [NotMapped]
+        public int[] CategoryIds { get; set; }
+        // Navigation property for BookCategories
+        public ICollection<BookCategory> BookCategories { get; set; }
+
+        [NotMapped]
+        public MultiSelectList? MultiCategoryList { get; set; }
+        [NotMapped]
+        public List<int>? Categories { get; set; }
+        [NotMapped]
+        public string? CategoryName { get; set; }
+
     }
 }

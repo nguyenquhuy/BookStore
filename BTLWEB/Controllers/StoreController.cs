@@ -40,6 +40,14 @@ namespace BTLWEB.Controllers
             {
                 return NotFound();
             }
+            var categories = await (from category in _context.Category
+                                    join bc in _context.BookCategory
+                                    on category.Id equals bc.CategoryId
+                                    where bc.BookId == id
+                                    select category.Name
+                                    ).ToListAsync();
+
+            ViewData["Categories"] = categories;
 
             return View(book);
         }

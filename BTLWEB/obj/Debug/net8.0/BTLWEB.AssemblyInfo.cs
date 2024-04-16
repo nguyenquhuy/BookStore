@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BTLWEB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb96cf6a0ad40da859c78205520770bbc5e4c24f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0078fdc35e51bc5c3638f330e0f7cf1b7b7578d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("BTLWEB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BTLWEB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

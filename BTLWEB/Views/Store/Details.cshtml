@@ -13,6 +13,26 @@
             <hr />
             <dl class="row">
                 <dt class="col-sm-3">
+                    Categories
+                </dt>
+                <dd class="col-sm-9">
+                    @if (ViewData["Categories"] is List<string> categories && categories.Count > 0)
+                    {
+                        for (int i = 0; i < categories.Count; i++)
+                        {
+                            <a href="@Url.Action("Search", "Category", new { category = categories[i] })">@categories[i]</a>
+                            @if (i != categories.Count - 1)
+                            {
+                                <span>,</span>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <span>No categories available</span>
+                    }
+                </dd>
+                <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.Title)
                 </dt>
                 <dd class="col-sm-9">

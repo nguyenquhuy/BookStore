@@ -14,5 +14,9 @@ namespace BTLWEB.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Category> Category { get; set; }
+
+        public DbSet<BookCategory> BookCategory { get; set; }
+        
+        
     }
 }
