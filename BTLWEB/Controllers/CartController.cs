@@ -1,5 +1,6 @@
 ﻿using BTLWEB.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BTLWEB.Controllers
@@ -9,27 +10,30 @@ namespace BTLWEB.Controllers
     {
         private readonly BookContext _context;
         private readonly Cart _cart;
+        private readonly UserManager<DefaultUser> _userManager;
 
-        public CartController(BookContext context,Cart cart)
+        public CartController(BookContext context, Cart cart, UserManager<DefaultUser> userManager)
         {
             _context = context;
             _cart = cart;
+            _userManager = userManager;
         }
-
 
         public IActionResult Index()
         {
+            var userId = _userManager.GetUserId(User);
             var items = _cart.GetAllCartItems();
             _cart.CartItems = items;
             return View(_cart);
         }
 
-        public IActionResult AddToCart(int id) 
+        public IActionResult AddToCart(int id)
         {
             var selectedBook = GetBookById(id);
             if (selectedBook != null)
             {
-                _cart.AddToCart(selectedBook, 1);
+                var userId = _userManager.GetUserId(User);
+                _cart.AddToCart(selectedBook, 1, userId);
             }
             return RedirectToAction("Index", "Store");
         }
@@ -39,7 +43,8 @@ namespace BTLWEB.Controllers
             var selectedBook = GetBookById(id);
             if (selectedBook != null)
             {
-                _cart.RemoveCart(selectedBook);
+                var userId = _userManager.GetUserId(User);
+                _cart.RemoveCart(selectedBook, userId);
             }
             return RedirectToAction("Index");
         }
@@ -49,7 +54,8 @@ namespace BTLWEB.Controllers
             var selectedBook = GetBookById(id);
             if (selectedBook != null)
             {
-                _cart.ReduceQuantity(selectedBook);
+                var userId = _userManager.GetUserId(User);
+                _cart.ReduceQuantity(selectedBook, userId);
             }
             return RedirectToAction("Index");
         }
@@ -57,17 +63,17 @@ namespace BTLWEB.Controllers
         public IActionResult IncreaseQuantity(int id)
         {
             var selectedBook = GetBookById(id);
-
             if (selectedBook != null)
             {
-                _cart.IncreaseQuantity(selectedBook);
+                var userId = _userManager.GetUserId(User);
+                _cart.IncreaseQuantity(selectedBook, userId);
             }
-
             return RedirectToAction("Index");
         }
 
         public IActionResult ClearCart()
         {
+            var userId = _userManager.GetUserId(User);
             _cart.ClearCart();
             return RedirectToAction("Index");
         }
@@ -77,4 +83,5 @@ namespace BTLWEB.Controllers
             return _context.Book.FirstOrDefault(b => b.Id == id);
         }
     }
+
 }

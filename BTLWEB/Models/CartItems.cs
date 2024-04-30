@@ -6,5 +6,6 @@
         public Book? Book { get; set; }
         public int Quantity { get; set; }
         public string? CartId { get; set; }
+        public string? UserId { get; set; } // Add UserId property to associate CartItems with users
     }
 }
